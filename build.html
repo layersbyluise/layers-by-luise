@@ -13,34 +13,66 @@ body {
     background: #fff7f8;
 }
 
-/* GLASS JAR */
+/* HEADER */
+header {
+    background: #ffd6dc;
+    padding: 15px;
+}
+
+/* LANGUAGE */
+.lang {
+    margin: 10px;
+}
+
+/* JAR */
 .jar {
-    width: 160px;
-    height: 260px;
-    margin: 25px auto;
-    border-radius: 30px;
+    width: 170px;
+    height: 270px;
+    margin: 20px auto;
+    border-radius: 35px;
     border: 4px solid rgba(255,255,255,0.8);
-    background: rgba(255,255,255,0.4);
-    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
     overflow: hidden;
     display: flex;
     flex-direction: column-reverse;
+    position: relative;
+}
+
+/* GLASS SHINE */
+.jar::before {
+    content: "";
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    left: 0;
+    background: rgba(255,255,255,0.25);
 }
 
 /* LAYERS */
-.layer { width: 100%; transition: 0.3s; }
+.layer {
+    width: 100%;
+    transition: all 0.5s ease;
+}
 
 .base { height: 25%; background: #f5d6a1; }
 .cream { height: 25%; background: #ffe4ec; }
 .filling { height: 25%; background: #ff9aa8; }
 .topping { height: 25%; background: #fff; }
 
+/* UI */
 select {
     padding: 10px;
     margin: 8px;
     border-radius: 10px;
 }
-h3 { color: #b35c6b; }
+
+.price {
+    font-size: 20px;
+    margin: 10px;
+    color: #b35c6b;
+}
 </style>
 
 </head>
@@ -49,6 +81,14 @@ h3 { color: #b35c6b; }
 
 <header>
     <h1>Build Your Cake Jar 🫙</h1>
+
+```
+<div class="lang">
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('de')">DE</button>
+</div>
+```
+
 </header>
 
 <div class="jar">
@@ -58,38 +98,87 @@ h3 { color: #b35c6b; }
     <div class="layer base" id="base"></div>
 </div>
 
-<h3>Base</h3>
+<div class="price">
+    Price: €<span id="price">6.00</span>
+</div>
+
+<h3 id="t1">Base</h3>
 <select onchange="base(this.value)">
-    <option value="#f5d6a1">Vanilla</option>
-    <option value="#5a3a2e">Chocolate</option>
-    <option value="#c14444">Red Velvet</option>
+    <option value="6">Vanilla</option>
+    <option value="6">Chocolate</option>
+    <option value="7.5">Red Velvet (+€1.5)</option>
 </select>
 
-<h3>Cream</h3>
+<h3 id="t2">Cream</h3>
 <select onchange="cream(this.value)">
-    <option value="#ffe4ec">Vanilla</option>
-    <option value="#ffb6c1">Berry</option>
+    <option value="0">Vanilla</option>
+    <option value="0.5">Berry (+€0.5)</option>
 </select>
 
-<h3>Filling</h3>
+<h3 id="t3">Filling</h3>
 <select onchange="fill(this.value)">
-    <option value="#ff6b81">Strawberry</option>
-    <option value="#6d4c41">Chocolate</option>
+    <option value="0">Strawberry</option>
+    <option value="0.5">Chocolate (+€0.5)</option>
 </select>
 
-<h3>Topping</h3>
+<h3 id="t4">Topping</h3>
 <select onchange="top(this.value)">
-    <option value="#ffffff">Classic</option>
-    <option value="#fdcb6e">Crunch</option>
+    <option value="0">Classic</option>
+    <option value="0.5">Crunch (+€0.5)</option>
 </select>
 
 <script>
-function base(c){document.getElementById("base").style.background=c;}
-function cream(c){document.getElementById("cream").style.background=c;}
-function fill(c){document.getElementById("filling").style.background=c;}
-function top(c){document.getElementById("topping").style.background=c;}
+let price = 6;
+
+function updatePrice() {
+    document.getElementById("price").innerText = price.toFixed(2);
+}
+
+function base(val){
+    price = 6;
+    updatePrice();
+    document.getElementById("base").style.background =
+        val == 6 ? "#f5d6a1" : "#c14444";
+    price = parseFloat(val) + 1;
+    updatePrice();
+}
+
+function cream(val){
+    price += parseFloat(val);
+    updatePrice();
+    document.getElementById("cream").style.background =
+        val == 0 ? "#ffe4ec" : "#ffb6c1";
+}
+
+function fill(val){
+    price += parseFloat(val);
+    updatePrice();
+    document.getElementById("filling").style.background =
+        val == 0 ? "#ff9aa8" : "#6d4c41";
+}
+
+function top(val){
+    price += parseFloat(val);
+    updatePrice();
+    document.getElementById("topping").style.background =
+        val == 0 ? "#fff" : "#fdcb6e";
+}
+
+/* LANGUAGE */
+function setLang(lang){
+    if(lang === "de"){
+        document.getElementById("t1").innerText = "Boden";
+        document.getElementById("t2").innerText = "Creme";
+        document.getElementById("t3").innerText = "Füllung";
+        document.getElementById("t4").innerText = "Topping";
+    } else {
+        document.getElementById("t1").innerText = "Base";
+        document.getElementById("t2").innerText = "Cream";
+        document.getElementById("t3").innerText = "Filling";
+        document.getElementById("t4").innerText = "Topping";
+    }
+}
 </script>
 
 </body>
 </html>
-
