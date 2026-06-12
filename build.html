@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Build Your Jar - Layers by Luise</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+body {
+    text-align: center;
+}
+
+.jar {
+    width: 150px;
+    height: 250px;
+    border: 4px solid #ccc;
+    border-radius: 20px 20px 40px 40px;
+    margin: 30px auto;
+    overflow: hidden;
+    background: white;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.layer {
+    width: 100%;
+    transition: 0.3s;
+}
+
+.base { background: #f5d6a1; height: 25%; }
+.cream { background: #ffe4ec; height: 25%; }
+.filling { background: #ff9aa8; height: 25%; }
+.topping { background: #fff; height: 25%; }
+
+select {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>Build Your Cake Jar 🫙</h1>
+    <p>See your jar come to life</p>
+</header>
+
+<div class="jar">
+    <div class="layer topping" id="topping"></div>
+    <div class="layer filling" id="filling"></div>
+    <div class="layer cream" id="cream"></div>
+    <div class="layer base" id="base"></div>
+</div>
+
+<section>
+<h3>Cake Base</h3>
+<select onchange="updateBase(this.value)">
+    <option value="#f5d6a1">Vanilla</option>
+    <option value="#5a3a2e">Chocolate</option>
+    <option value="#b33">Red Velvet</option>
+    <option value="#f7e7a9">Lemon</option>
+    <option value="#c49a6c">Hazelnut</option>
+</select>
+
+<h3>Cream</h3>
+<select onchange="updateCream(this.value)">
+    <option value="#ffe4ec">Vanilla Buttercream</option>
+    <option value="#d6a4a4">Chocolate Cream</option>
+    <option value="#ffb6c1">Berry Cream</option>
+    <option value="#fff0d9">White Chocolate</option>
+    <option value="#e6c7a1">Caramel Cream</option>
+</select>
+
+<h3>Filling</h3>
+<select onchange="updateFilling(this.value)">
+    <option value="#ff6b81">Strawberry</option>
+    <option value="#a29bfe">Berry</option>
+    <option value="#e84393">Raspberry</option>
+    <option value="#6d4c41">Chocolate</option>
+    <option value="#d4a373">Cookie</option>
+</select>
+
+<h3>Topping</h3>
+<select onchange="updateTopping(this.value)">
+    <option value="#ffffff">Classic</option>
+    <option value="#ff7675">Berry Garden</option>
+    <option value="#2d3436">Chocolate Dream</option>
+    <option value="#fdcb6e">Cookie Crunch</option>
+</select>
+</section>
+
+<script>
+function updateBase(color) {
+    document.getElementById("base").style.background = color;
+}
+
+function updateCream(color) {
+    document.getElementById("cream").style.background = color;
+}
+
+function updateFilling(color) {
+    document.getElementById("filling").style.background = color;
+}
+
+function updateTopping(color) {
+    document.getElementById("topping").style.background = color;
+}
+</script>
+
+</body>
+</html>
