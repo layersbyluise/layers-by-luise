@@ -1,44 +1,98 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Build Your Jar</title>
+<title>Build Your Jar - Layers by Luise</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body{
+
+/* =========================
+   BASE RESET
+========================= */
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* =========================
+   PAGE BACKGROUND
+========================= */
+body{
     font-family:Inter, sans-serif;
-    background:#fff7f8;
-    text-align:center;
-}
-
-/* HEADER */
-header{
-    background:#ffd6dc;
-    padding:20px;
-    font-family:"Playfair Display", serif;
-}
-
-/* CENTER LAYOUT */
-.container{
+    background:linear-gradient(180deg,#fff7f8,#fff);
+    color:#333;
     display:flex;
     flex-direction:column;
     align-items:center;
-    padding:20px;
 }
 
-/* GLASS JAR (FIXED ORIENTATION) */
+/* =========================
+   HEADER
+========================= */
+header{
+    width:100%;
+    background:#ffd6dc;
+    padding:25px 15px;
+    text-align:center;
+    font-family:"Playfair Display", serif;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+header h1{
+    font-size:28px;
+}
+
+header p{
+    font-size:14px;
+    opacity:0.8;
+}
+
+/* =========================
+   LANGUAGE SWITCH
+========================= */
+.lang-switch{
+    margin-top:10px;
+}
+
+.lang-switch button{
+    border:none;
+    padding:8px 14px;
+    margin:4px;
+    border-radius:12px;
+    background:white;
+    cursor:pointer;
+    font-weight:500;
+}
+
+/* =========================
+   MAIN WRAPPER
+========================= */
+.wrapper{
+    width:100%;
+    max-width:520px;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:15px;
+}
+
+/* =========================
+   GLASS JAR
+========================= */
 .jar{
-    width:180px;
-    height:280px;
-    border-radius:40px;
-    border:4px solid rgba(255,255,255,0.8);
+    width:190px;
+    height:290px;
+    border-radius:45px;
+    border:4px solid rgba(255,255,255,0.9);
     background:rgba(255,255,255,0.35);
-    backdrop-filter:blur(10px);
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+    backdrop-filter:blur(12px);
+    box-shadow:
+        inset 0 0 25px rgba(0,0,0,0.05),
+        0 10px 25px rgba(0,0,0,0.08);
     overflow:hidden;
     display:flex;
     flex-direction:column;
@@ -51,65 +105,110 @@ header{
     position:absolute;
     left:10px;
     top:0;
-    width:40%;
+    width:45%;
     height:100%;
     background:rgba(255,255,255,0.25);
+    transform:skewX(-8deg);
 }
 
-/* LAYERS */
+/* =========================
+   LAYERS
+========================= */
 .layer{
     flex:1;
     transition:all 0.5s ease;
 }
 
-/* default colors */
+/* base colors */
 .base{background:#f5d6a1;}
 .cream{background:#ffe4ec;}
 .filling{background:#ff9aa8;}
 .topping{background:#ffffff;}
 
-/* SELECTS */
-select{
-    padding:10px;
-    margin:6px;
-    border-radius:10px;
-    border:1px solid #ddd;
-}
-
-/* PRICE */
-.price{
-    margin:15px;
-    font-size:20px;
+/* =========================
+   PRICE DISPLAY
+========================= */
+.price-box{
+    font-size:22px;
+    font-weight:600;
     color:#b35c6b;
 }
 
-/* BUTTON */
-button{
-    padding:12px 18px;
-    border:none;
-    border-radius:20px;
-    background:#ffb6c1;
-    cursor:pointer;
+/* =========================
+   SECTION TITLES
+========================= */
+.section-title{
+    font-family:"Playfair Display", serif;
+    font-size:18px;
     margin-top:10px;
+    color:#b35c6b;
 }
 
-button:hover{
+/* =========================
+   SELECT BOXES
+========================= */
+select{
+    width:85%;
+    padding:10px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    background:white;
+    font-size:14px;
+}
+
+/* =========================
+   ORDER BUTTON
+========================= */
+.order-btn{
+    margin-top:20px;
+    padding:14px 22px;
+    border:none;
+    border-radius:25px;
+    background:#ffb6c1;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.order-btn:hover{
     background:#ff9aa8;
+    transform:scale(1.03);
 }
-</style>
 
+/* =========================
+   SMALL NOTE TEXT
+========================= */
+.note{
+    font-size:12px;
+    opacity:0.6;
+    margin-top:5px;
+}
+
+</style>
 </head>
 
 <body>
 
+<!-- =========================
+     HEADER
+========================= -->
 <header>
-<h1>Build Your Cake Jar 🫙</h1>
+    <h1>Build Your Cake Jar 🫙</h1>
+    <p>Create your perfect dessert</p>
+
+    <div class="lang-switch">
+        <button onclick="setLang('en')">EN</button>
+        <button onclick="setLang('de')">DE</button>
+    </div>
 </header>
 
-<div class="container">
+<!-- =========================
+     MAIN
+========================= -->
+<div class="wrapper">
 
-<!-- JAR -->
-
+<!-- JAR VISUAL -->
 <div class="jar">
     <div class="layer base" id="base"></div>
     <div class="layer cream" id="cream"></div>
@@ -117,107 +216,127 @@ button:hover{
     <div class="layer topping" id="topping"></div>
 </div>
 
-<div class="price">Price: €<span id="price">6.00</span></div>
+<!-- PRICE -->
+<div class="price-box">
+    €<span id="price">6.00</span>
+</div>
 
-<!-- BASE -->
+<div class="note">Starting price includes base jar</div>
 
-<h3>Base</h3>
+<!-- =========================
+     BASE
+========================= -->
+<div class="section-title" id="t-base">Base</div>
 <select onchange="setBase(this.value)">
-    <option value="vanilla">Vanilla</option>
-    <option value="chocolate">Chocolate</option>
-    <option value="red">Red Velvet</option>
+    <option value="0">Vanilla Sponge</option>
+    <option value="0">Chocolate Sponge</option>
+    <option value="1.5">Red Velvet (+€1.5)</option>
 </select>
 
-<!-- CREAM -->
-
-<h3>Cream</h3>
+<!-- =========================
+     CREAM
+========================= -->
+<div class="section-title" id="t-cream">Cream</div>
 <select onchange="setCream(this.value)">
-    <option value="vanilla">Vanilla Buttercream</option>
-    <option value="berry">Berry Cream</option>
+    <option value="0">Vanilla Buttercream</option>
+    <option value="0.5">Berry Cream (+€0.5)</option>
+    <option value="0.5">Salted Caramel (+€0.5)</option>
 </select>
 
-<!-- FILLING -->
-
-<h3>Filling</h3>
-<select onchange="setFilling(this.value)">
-    <option value="strawberry">Strawberry</option>
-    <option value="chocolate">Chocolate</option>
+<!-- =========================
+     FILLING
+========================= -->
+<div class="section-title" id="t-fill">Filling</div>
+<select onchange="setFill(this.value)">
+    <option value="0">Strawberry Compote</option>
+    <option value="0.5">Chocolate Ganache (+€0.5)</option>
+    <option value="0.5">Raspberry Jam (+€0.5)</option>
 </select>
 
-<!-- TOPPING -->
-
-<h3>Topping</h3>
-<select onchange="setTopping(this.value)">
-    <option value="classic">Classic</option>
-    <option value="crunch">Crunch</option>
+<!-- =========================
+     TOPPING
+========================= -->
+<div class="section-title" id="t-top">Topping</div>
+<select onchange="setTop(this.value)">
+    <option value="0">Classic Cream Top</option>
+    <option value="0.5">Cookie Crunch (+€0.5)</option>
+    <option value="0.5">Berry Dust (+€0.5)</option>
 </select>
 
-<!-- ACTIONS -->
-
-<button onclick="goOrder()">Order This Jar</button>
-
-<br><br>
-
-<button onclick="setLang('en')">EN</button> <button onclick="setLang('de')">DE</button>
+<!-- ORDER -->
+<button class="order-btn" onclick="goOrder()">
+    Order This Jar
+</button>
 
 </div>
 
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 <script>
 
-let price = 6;
+let basePrice = 6;
+let extras = 0;
 
 function updatePrice(){
-    document.getElementById("price").innerText = price.toFixed(2);
+    document.getElementById("price").innerText =
+    (basePrice + extras).toFixed(2);
 }
 
-/* COLORS */
-function setBase(v){
+/* BASE */
+function setBase(val){
+    extras = parseFloat(val);
+
     document.getElementById("base").style.background =
-        v==="vanilla"?"#f5d6a1":v==="chocolate"?"#5a3a2e":"#c14444";
-    price = 6;
+        val==0 ? "#f5d6a1" : "#c14444";
+
     updatePrice();
 }
 
-function setCream(v){
+/* CREAM */
+function setCream(val){
     document.getElementById("cream").style.background =
-        v==="vanilla"?"#ffe4ec":"#ffb6c1";
-    price += 0.5;
+        val==0 ? "#ffe4ec" : "#ffb6c1";
+
+    extras += parseFloat(val);
     updatePrice();
 }
 
-function setFilling(v){
+/* FILL */
+function setFill(val){
     document.getElementById("filling").style.background =
-        v==="strawberry"?"#ff6b81":"#6d4c41";
-    price += 0.5;
+        val==0 ? "#ff9aa8" : "#6d4c41";
+
+    extras += parseFloat(val);
     updatePrice();
 }
 
-function setTopping(v){
+/* TOP */
+function setTop(val){
     document.getElementById("topping").style.background =
-        v==="classic"?"#ffffff":"#fdcb6e";
-    price += 0.5;
+        val==0 ? "#ffffff" : "#fdcb6e";
+
+    extras += parseFloat(val);
     updatePrice();
 }
 
-/* ORDER BUTTON */
+/* ORDER */
 function goOrder(){
-    window.location.href="index.html#order";
+    window.location.href="/#order";
 }
 
-/* LANGUAGE FIX */
+/* LANGUAGE */
 function setLang(lang){
-    const labels = document.querySelectorAll("h3");
-    if(lang==="de"){
-        labels[0].innerText="Boden";
-        labels[1].innerText="Creme";
-        labels[2].innerText="Füllung";
-        labels[3].innerText="Topping";
-    } else {
-        labels[0].innerText="Base";
-        labels[1].innerText="Cream";
-        labels[2].innerText="Filling";
-        labels[3].innerText="Topping";
-    }
+
+    const map = {
+        en:["Base","Cream","Filling","Topping"],
+        de:["Boden","Creme","Füllung","Topping"]
+    };
+
+    document.getElementById("t-base").innerText = map[lang][0];
+    document.getElementById("t-cream").innerText = map[lang][1];
+    document.getElementById("t-fill").innerText = map[lang][2];
+    document.getElementById("t-top").innerText = map[lang][3];
 }
 
 </script>
