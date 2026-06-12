@@ -4,74 +4,97 @@
 <head>
 <meta charset="UTF-8">
 <title>Build Your Jar</title>
-<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-body {
-    font-family: Arial;
-    text-align: center;
-    background: #fff7f8;
+body{
+    margin:0;
+    font-family:Inter, sans-serif;
+    background:#fff7f8;
+    text-align:center;
 }
 
 /* HEADER */
-header {
-    background: #ffd6dc;
-    padding: 15px;
+header{
+    background:#ffd6dc;
+    padding:20px;
+    font-family:"Playfair Display", serif;
 }
 
-/* LANGUAGE */
-.lang {
-    margin: 10px;
+/* CENTER LAYOUT */
+.container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:20px;
 }
 
-/* JAR */
-.jar {
-    width: 170px;
-    height: 270px;
-    margin: 20px auto;
-    border-radius: 35px;
-    border: 4px solid rgba(255,255,255,0.8);
-    background: rgba(255,255,255,0.35);
-    backdrop-filter: blur(10px);
+/* GLASS JAR (FIXED ORIENTATION) */
+.jar{
+    width:180px;
+    height:280px;
+    border-radius:40px;
+    border:4px solid rgba(255,255,255,0.8);
+    background:rgba(255,255,255,0.35);
+    backdrop-filter:blur(10px);
     box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column-reverse;
-    position: relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    position:relative;
 }
 
-/* GLASS SHINE */
-.jar::before {
-    content: "";
-    position: absolute;
-    width: 40%;
-    height: 100%;
-    left: 0;
-    background: rgba(255,255,255,0.25);
+/* glass shine */
+.jar::before{
+    content:"";
+    position:absolute;
+    left:10px;
+    top:0;
+    width:40%;
+    height:100%;
+    background:rgba(255,255,255,0.25);
 }
 
 /* LAYERS */
-.layer {
-    width: 100%;
-    transition: all 0.5s ease;
+.layer{
+    flex:1;
+    transition:all 0.5s ease;
 }
 
-.base { height: 25%; background: #f5d6a1; }
-.cream { height: 25%; background: #ffe4ec; }
-.filling { height: 25%; background: #ff9aa8; }
-.topping { height: 25%; background: #fff; }
+/* default colors */
+.base{background:#f5d6a1;}
+.cream{background:#ffe4ec;}
+.filling{background:#ff9aa8;}
+.topping{background:#ffffff;}
 
-/* UI */
-select {
-    padding: 10px;
-    margin: 8px;
-    border-radius: 10px;
+/* SELECTS */
+select{
+    padding:10px;
+    margin:6px;
+    border-radius:10px;
+    border:1px solid #ddd;
 }
 
-.price {
-    font-size: 20px;
-    margin: 10px;
-    color: #b35c6b;
+/* PRICE */
+.price{
+    margin:15px;
+    font-size:20px;
+    color:#b35c6b;
+}
+
+/* BUTTON */
+button{
+    padding:12px 18px;
+    border:none;
+    border-radius:20px;
+    background:#ffb6c1;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+button:hover{
+    background:#ff9aa8;
 }
 </style>
 
@@ -80,104 +103,123 @@ select {
 <body>
 
 <header>
-    <h1>Build Your Cake Jar 🫙</h1>
-
-```
-<div class="lang">
-    <button onclick="setLang('en')">EN</button>
-    <button onclick="setLang('de')">DE</button>
-</div>
-```
-
+<h1>Build Your Cake Jar 🫙</h1>
 </header>
 
+<div class="container">
+
+<!-- JAR -->
+
 <div class="jar">
-    <div class="layer topping" id="topping"></div>
-    <div class="layer filling" id="filling"></div>
-    <div class="layer cream" id="cream"></div>
     <div class="layer base" id="base"></div>
+    <div class="layer cream" id="cream"></div>
+    <div class="layer filling" id="filling"></div>
+    <div class="layer topping" id="topping"></div>
 </div>
 
-<div class="price">
-    Price: €<span id="price">6.00</span>
+<div class="price">Price: €<span id="price">6.00</span></div>
+
+<!-- BASE -->
+
+<h3>Base</h3>
+<select onchange="setBase(this.value)">
+    <option value="vanilla">Vanilla</option>
+    <option value="chocolate">Chocolate</option>
+    <option value="red">Red Velvet</option>
+</select>
+
+<!-- CREAM -->
+
+<h3>Cream</h3>
+<select onchange="setCream(this.value)">
+    <option value="vanilla">Vanilla Buttercream</option>
+    <option value="berry">Berry Cream</option>
+</select>
+
+<!-- FILLING -->
+
+<h3>Filling</h3>
+<select onchange="setFilling(this.value)">
+    <option value="strawberry">Strawberry</option>
+    <option value="chocolate">Chocolate</option>
+</select>
+
+<!-- TOPPING -->
+
+<h3>Topping</h3>
+<select onchange="setTopping(this.value)">
+    <option value="classic">Classic</option>
+    <option value="crunch">Crunch</option>
+</select>
+
+<!-- ACTIONS -->
+
+<button onclick="goOrder()">Order This Jar</button>
+
+<br><br>
+
+<button onclick="setLang('en')">EN</button> <button onclick="setLang('de')">DE</button>
+
 </div>
-
-<h3 id="t1">Base</h3>
-<select onchange="base(this.value)">
-    <option value="6">Vanilla</option>
-    <option value="6">Chocolate</option>
-    <option value="7.5">Red Velvet (+€1.5)</option>
-</select>
-
-<h3 id="t2">Cream</h3>
-<select onchange="cream(this.value)">
-    <option value="0">Vanilla</option>
-    <option value="0.5">Berry (+€0.5)</option>
-</select>
-
-<h3 id="t3">Filling</h3>
-<select onchange="fill(this.value)">
-    <option value="0">Strawberry</option>
-    <option value="0.5">Chocolate (+€0.5)</option>
-</select>
-
-<h3 id="t4">Topping</h3>
-<select onchange="top(this.value)">
-    <option value="0">Classic</option>
-    <option value="0.5">Crunch (+€0.5)</option>
-</select>
 
 <script>
+
 let price = 6;
 
-function updatePrice() {
+function updatePrice(){
     document.getElementById("price").innerText = price.toFixed(2);
 }
 
-function base(val){
+/* COLORS */
+function setBase(v){
+    document.getElementById("base").style.background =
+        v==="vanilla"?"#f5d6a1":v==="chocolate"?"#5a3a2e":"#c14444";
     price = 6;
     updatePrice();
-    document.getElementById("base").style.background =
-        val == 6 ? "#f5d6a1" : "#c14444";
-    price = parseFloat(val) + 1;
-    updatePrice();
 }
 
-function cream(val){
-    price += parseFloat(val);
-    updatePrice();
+function setCream(v){
     document.getElementById("cream").style.background =
-        val == 0 ? "#ffe4ec" : "#ffb6c1";
+        v==="vanilla"?"#ffe4ec":"#ffb6c1";
+    price += 0.5;
+    updatePrice();
 }
 
-function fill(val){
-    price += parseFloat(val);
-    updatePrice();
+function setFilling(v){
     document.getElementById("filling").style.background =
-        val == 0 ? "#ff9aa8" : "#6d4c41";
-}
-
-function top(val){
-    price += parseFloat(val);
+        v==="strawberry"?"#ff6b81":"#6d4c41";
+    price += 0.5;
     updatePrice();
-    document.getElementById("topping").style.background =
-        val == 0 ? "#fff" : "#fdcb6e";
 }
 
-/* LANGUAGE */
+function setTopping(v){
+    document.getElementById("topping").style.background =
+        v==="classic"?"#ffffff":"#fdcb6e";
+    price += 0.5;
+    updatePrice();
+}
+
+/* ORDER BUTTON */
+function goOrder(){
+    window.location.href="index.html#order";
+}
+
+/* LANGUAGE FIX */
 function setLang(lang){
-    if(lang === "de"){
-        document.getElementById("t1").innerText = "Boden";
-        document.getElementById("t2").innerText = "Creme";
-        document.getElementById("t3").innerText = "Füllung";
-        document.getElementById("t4").innerText = "Topping";
+    const labels = document.querySelectorAll("h3");
+    if(lang==="de"){
+        labels[0].innerText="Boden";
+        labels[1].innerText="Creme";
+        labels[2].innerText="Füllung";
+        labels[3].innerText="Topping";
     } else {
-        document.getElementById("t1").innerText = "Base";
-        document.getElementById("t2").innerText = "Cream";
-        document.getElementById("t3").innerText = "Filling";
-        document.getElementById("t4").innerText = "Topping";
+        labels[0].innerText="Base";
+        labels[1].innerText="Cream";
+        labels[2].innerText="Filling";
+        labels[3].innerText="Topping";
     }
 }
+
 </script>
 
 </body>
