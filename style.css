@@ -1,0 +1,75 @@
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+background: #fff7f8;
+color: #444;
+}
+
+header {
+background: #ffd6dc;
+text-align: center;
+padding: 30px;
+}
+
+header h1 {
+margin: 0;
+font-size: 2.5em;
+color: #b35c6b;
+}
+
+nav {
+display: flex;
+justify-content: center;
+gap: 20px;
+background: #ffe4e8;
+padding: 10px;
+}
+
+nav a {
+text-decoration: none;
+color: #b35c6b;
+font-weight: bold;
+}
+
+.hero {
+text-align: center;
+padding: 40px;
+}
+
+section {
+padding: 30px;
+}
+
+.card {
+background: white;
+padding: 20px;
+margin: 10px;
+border-radius: 15px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+form input, form textarea {
+width: 80%;
+padding: 10px;
+margin: 10px 0;
+border-radius: 10px;
+border: 1px solid #ddd;
+}
+
+button {
+background: #ffb6c1;
+border: none;
+padding: 10px 20px;
+border-radius: 20px;
+cursor: pointer;
+}
+
+button:hover {
+background: #ff9aa8;
+}
+
+footer {
+text-align: center;
+padding: 20px;
+background: #ffd6dc;
+}
